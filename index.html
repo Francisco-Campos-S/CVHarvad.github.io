@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador CV Harvard - Solo Español</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Variables CSS para temas */
+        :root {
+            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-body: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e9ecef;
+            --card-bg: #ffffff;
+            --preview-bg: #f8f9fa;
+            --preview-border: #dee2e6;
+            --btn-success: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            --btn-info: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: linear-gradient(135deg, #4c63d2 0%, #5a3d91 100%);
+            --bg-body: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --border-color: #444444;
+            --card-bg: #2d2d2d;
+            --preview-bg: #333333;
+            --preview-border: #555555;
+            --btn-success: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+            --btn-info: linear-gradient(135deg, #138496 0%, #17a2b8 100%);
+            --shadow: rgba(0,0,0,0.3);
+        }
+
+        body {
+            background: var(--bg-primary);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px var(--shadow);
+            margin: 20px auto;
+            padding: 30px;
+            max-width: 800px;
+            transition: all 0.3s ease;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid;
+            border-image: var(--bg-primary) 1;
+        }
+        
+        .header h1 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle i {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        .form-control:focus {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .btn-primary {
+            background: var(--bg-primary);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--bg-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--text-secondary);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-info {
+            background: var(--btn-info);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .section-header {
+            background: var(--bg-primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+        
+        .preview-area {
+            background: var(--preview-bg);
+            border: 2px dashed var(--preview-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 200px;
+        }
+        
+        .download-btn {
+            background: var(--btn-success);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(40, 167, 69, 0.3);
+            color: white;
+        }
+        
+        .info-card {
+            background: var(--btn-info);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .textarea-large {
+            min-height: 120px;
+        }
+        
+        .icon {
+            margin-right: 8px;
+        }
+        
+        .pdf-loading {
+            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+            pointer-events: none;
+        }
+        
+        .pdf-loading .icon {
+            animation: spin 1s linear infinite;
+        }
+
+        .form-text {
+            color: var(--text-secondary);
+        }
+
+        #cvPreview {
+            background: white !important;
+            color: #000 !important;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+            
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toggle de tema -->
+    <div class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <div>
+                    <h1><i class="fas fa-file-alt icon"></i>Generador de CV Harvard</h1>
+                    <p>Crea tu CV profesional en formato Harvard - Solo Español</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contenedor de alertas -->
+        <div id="alertas"></div>
+        
+        <form id="cvForm">
+            <!-- Información Personal -->
+            <div class="section-header">
+                <i class="fas fa-user icon"></i>Información Personal
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ej: María González López" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="maria@ejemplo.com" required>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" placeholder="+34 123 456 789">
+                </div>
+                <div class="col-md-6">
+                    <label for="ubicacion" class="form-label">Ubicación</label>
+                    <input type="text" class="form-control" id="ubicacion" placeholder="Madrid, España">
+                </div>
+            </div>
+            
+            <!-- Enlaces adicionales -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="linkedin" class="form-label">LinkedIn (Opcional)</label>
+                    <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/tu-perfil">
+                </div>
+                <div class="col-md-6">
+                    <label for="portfolio" class="form-label">Portfolio (Opcional)</label>
+                    <input type="url" class="form-control" id="portfolio" placeholder="https://tu-portfolio.com">
+                </div>
+            </div>
+            
+            <!-- Educación -->
+            <div class="section-header">
+                <i class="fas fa-graduation-cap icon"></i>Educación
+            </div>
+            
+            <div class="mb-3">
+                <label for="educacion" class="form-label">Formación Académica</label>
+                <textarea class="form-control textarea-large" id="educacion" 
+                    placeholder="Ejemplo:&#10;Máster en Ciencia de Datos&#10;Universidad de Barcelona, 2021-2023&#10;&#10;Licenciatura en Matemáticas&#10;Universidad Autónoma de Barcelona, 2017-2021"></textarea>
+                <div class="form-text">Separa cada título/institución con una línea nueva</div>
+            </div>
+            
+            <!-- Experiencia -->
+            <div class="section-header">
+                <i class="fas fa-briefcase icon"></i>Experiencia Profesional
+            </div>
+            
+            <div class="mb-3">
+                <label for="experiencia" class="form-label">Experiencia Laboral</label>
+                <textarea class="form-control textarea-large" id="experiencia" 
+                    placeholder="Ejemplo:&#10;Data Scientist&#10;InnovaTech Solutions, 2023-presente&#10;• Análisis de datos con Python y R&#10;• Desarrollo de modelos de machine learning&#10;• Visualización de datos con Tableau"></textarea>
+                <div class="form-text">Usa • para viñetas en las responsabilidades</div>
+            </div>
+            
+            <!-- Habilidades -->
+            <div class="section-header">
+                <i class="fas fa-cogs icon"></i>Habilidades Técnicas
+            </div>
+            
+            <div class="mb-3">
+                <label for="habilidades" class="form-label">Competencias Técnicas</label>
+                <textarea class="form-control textarea-large" id="habilidades" 
+                    placeholder="Ejemplo:&#10;Lenguajes: Python, JavaScript, SQL&#10;Frameworks: React, Django, Flask&#10;Bases de datos: MySQL, MongoDB&#10;Herramientas: Git, Docker, AWS&#10;Idiomas: Español (nativo), Inglés (B2)"></textarea>
+                <div class="form-text">Agrupa por categorías para mejor organización</div>
+            </div>
+            
+            <!-- Botones de acción -->
+            <div class="text-center mt-4">
+                <button type="button" class="btn btn-primary" onclick="generarCV()">
+                    <i class="fas fa-magic icon"></i>Generar CV Harvard
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
+                    <i class="fas fa-eraser icon"></i>Limpiar
+                </button>
+                <button type="button" class="btn btn-info" onclick="llenarEjemploCompleto()">
+                    <i class="fas fa-user-graduate icon"></i>Ejemplo Completo
+                </button>
+            </div>
+        </form>
+        
+        <!-- Área de resultados -->
+        <div id="resultado" class="preview-area" style="display: none;">
+            <h4><i class="fas fa-file-code icon"></i>CV Harvard Generado</h4>
+            <div class="mb-3">
+                <button type="button" class="download-btn" onclick="generarWord()" id="wordBtn">
+                    <i class="fas fa-file-word icon"></i>Descargar Word
+                </button>
+                <button type="button" class="download-btn" onclick="verVistaPrevia()" id="previewBtn">
+                    <i class="fas fa-eye icon"></i>Vista Previa
+                </button>
+            </div>
+            <div id="previewArea" style="display: none;">
+                <h5>Vista Previa del CV:</h5>
+                <div id="cvPreview" style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Times New Roman', serif;"></div>
+            </div>
+        </div>
+        
+        <!-- Información adicional -->
+        <div class="info-card">
+            <h5><i class="fas fa-info-circle icon"></i>¿Cómo usar el generador?</h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="mb-0">
+                        <li>Completa el formulario con tu información personal y profesional</li>
+                        <li>Haz clic en "Generar CV Harvard" para procesar los datos</li>
+                        <li>Usa "Vista Previa" para ver cómo se verá tu CV</li>
+                        <li>Descarga tu CV en formato Word</li>
+                        <li>¡Tu CV profesional estará listo para enviar!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Función para cambiar entre tema claro y oscuro
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Cargar tema guardado al iniciar
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+            }
+        }
+
+        // Función para mostrar/ocultar vista previa
+        function verVistaPrevia() {
+            const previewArea = document.getElementById('previewArea');
+            const previewBtn = document.getElementById('previewBtn');
+            
+            if (previewArea.style.display === 'none') {
+                previewArea.style.display = 'block';
+                previewBtn.innerHTML = '<i class="fas fa-eye-slash icon"></i>Ocultar Vista Previa';
+                
+                // Generar vista previa
+                const datos = {
+                    nombre: document.getElementById('nombre').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    telefono: document.getElementById('telefono').value.trim(),
+                    ubicacion: document.getElementById('ubicacion').value.trim(),
+                    linkedin: document.getElementById('linkedin').value.trim(),
+                    portfolio: document.getElementById('portfolio').value.trim(),
+                    educacion: document.getElementById('educacion').value.trim(),
+                    experiencia: document.getElementById('experiencia').value.trim(),
+                    habilidades: document.getElementById('habilidades').value.trim()
+                };
+                
+                if (datos.nombre && datos.email) {
+                    const cvHTML = generarCVHTML(datos);
+                    document.getElementById('cvPreview').innerHTML = cvHTML;
+                }
+            } else {
+                previewArea.style.display = 'none';
+                previewBtn.innerHTML = '<i class="fas fa-eye icon"></i>Vista Previa';
+            }
+        }
+
+        // Cargar tema al iniciar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

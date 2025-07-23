@@ -1,0 +1,12 @@
+title: "Generador CV Harvard Online"
+description: "Crea tu CV profesional en formato Harvard directamente desde el navegador. PDF y Word gratis, sin instalaciones."
+lang: es
+
+# GitHub Pages configuration
+theme: minima
+plugins:
+  - jekyll-sitemap
+
+# Excluir archivos innecesarios
+exclude:
+  - "*.md"
