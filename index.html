@@ -4,209 +4,449 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador CV Harvard - Solo Español</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="description" content="Generador profesional de CV en formato Harvard. Crea tu currículum vitae de manera fácil y rápida con nuestro diseño profesional.">
+    <meta name="keywords" content="CV, currículum, Harvard, generador, trabajo, empleo, profesional">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Generador CV Harvard - Solo Español">
+    <meta property="og:description" content="Crea tu CV profesional en formato Harvard de manera gratuita">
+    <meta property="og:type" content="website">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables CSS para temas */
+        /* ===== VARIABLES CSS MEJORADAS ===== */
         :root {
-            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Color palette modernizada */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            
+            /* Colores principales */
+            --bg-primary: var(--primary-gradient);
             --bg-body: #ffffff;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --border-color: #e9ecef;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --text-muted: #a0aec0;
+            
+            /* Componentes */
+            --border-color: #e2e8f0;
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
             --card-bg: #ffffff;
-            --preview-bg: #f8f9fa;
-            --preview-border: #dee2e6;
-            --btn-success: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            --btn-info: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
-            --shadow: rgba(0,0,0,0.1);
+            --preview-bg: #f7fafc;
+            --preview-border: #e2e8f0;
+            
+            /* Botones */
+            --btn-primary: var(--primary-gradient);
+            --btn-success: var(--success-gradient);
+            --btn-secondary: #718096;
+            
+            /* Shadows modernizadas */
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Spacing system */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* Typography */
+            --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            
+            /* Z-index scale */
+            --z-dropdown: 1000;
+            --z-sticky: 1020;
+            --z-fixed: 1030;
+            --z-modal-backdrop: 1040;
+            --z-modal: 1050;
+            --z-popover: 1060;
+            --z-tooltip: 1070;
         }
 
+        /* ===== TEMA OSCURO MEJORADO ===== */
         [data-theme="dark"] {
-            --bg-primary: linear-gradient(135deg, #4c63d2 0%, #5a3d91 100%);
+            --bg-primary: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
             --bg-body: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --border-color: #444444;
-            --card-bg: #2d2d2d;
-            --preview-bg: #333333;
-            --preview-border: #555555;
-            --btn-success: linear-gradient(135deg, #20c997 0%, #28a745 100%);
-            --btn-info: linear-gradient(135deg, #138496 0%, #17a2b8 100%);
-            --shadow: rgba(0,0,0,0.3);
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --text-muted: #718096;
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --preview-bg: #4a5568;
+            --preview-border: #718096;
+            --btn-secondary: #4a5568;
+        }
+
+        /* ===== RESET Y BASE STYLES ===== */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             background: var(--bg-primary);
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: all 0.3s ease;
+            font-family: var(--font-family-primary);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0;
+            padding: 0;
         }
         
+        /* ===== LAYOUT COMPONENTS ===== */
         .container {
             background: var(--card-bg);
             color: var(--text-primary);
-            border-radius: 15px;
-            box-shadow: 0 15px 35px var(--shadow);
-            margin: 20px auto;
-            padding: 30px;
-            max-width: 800px;
-            transition: all 0.3s ease;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+            margin: var(--space-lg) auto;
+            padding: var(--space-2xl);
+            max-width: 900px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid;
-            border-image: var(--bg-primary) 1;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--bg-primary);
+            border-radius: 2px;
         }
         
         .header h1 {
             color: var(--text-primary);
             font-weight: 700;
-            margin-bottom: 10px;
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--space-sm);
+            background: var(--bg-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .header p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: var(--font-size-lg);
+            font-weight: 400;
+            margin: 0;
         }
 
+        /* ===== THEME TOGGLE MEJORADO ===== */
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: var(--space-lg);
+            right: var(--space-lg);
             background: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 50px;
-            padding: 10px 15px;
+            padding: var(--space-md);
             cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: var(--z-fixed);
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
         }
 
         .theme-toggle i {
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: var(--font-size-xl);
+            transition: all 0.3s ease;
         }
         
+        /* ===== FORM COMPONENTS MEJORADOS ===== */
         .form-label {
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-sm);
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
         }
         
         .form-control {
             background: var(--card-bg);
             color: var(--text-primary);
             border: 2px solid var(--border-color);
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            border-radius: var(--border-radius);
+            padding: var(--space-md) var(--space-lg);
+            font-size: var(--font-size-base);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
         .form-control::placeholder {
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            opacity: 0.8;
         }
         
         .form-control:focus {
             background: var(--card-bg);
             color: var(--text-primary);
             border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .form-control:hover:not(:focus) {
+            border-color: #667eea;
+            transform: translateY(-1px);
+        }
+        
+        /* ===== BUTTON SYSTEM MEJORADO ===== */
+        .btn {
+            border: none;
+            border-radius: var(--border-radius);
+            padding: var(--space-md) var(--space-xl);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn-primary {
-            background: var(--bg-primary);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            background: var(--btn-primary);
+            color: white;
         }
         
         .btn-primary:hover {
-            background: var(--bg-primary);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: var(--shadow-lg), 0 10px 20px rgba(102, 126, 234, 0.3);
+            color: white;
         }
 
         .btn-secondary {
-            background: var(--text-secondary);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            background: var(--btn-secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
         }
 
         .btn-info {
-            background: var(--btn-info);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg), 0 10px 20px rgba(79, 172, 254, 0.3);
+            color: white;
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
         
+        /* ===== SECTION HEADERS MEJORADOS ===== */
         .section-header {
             background: var(--bg-primary);
             color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 25px 0 15px 0;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--border-radius);
+            margin: var(--space-2xl) 0 var(--space-lg) 0;
             font-weight: 600;
+            font-size: var(--font-size-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .section-header .icon {
+            margin-right: var(--space-sm);
+            font-size: var(--font-size-xl);
         }
         
+        /* ===== PREVIEW AREA MEJORADA ===== */
         .preview-area {
             background: var(--preview-bg);
             border: 2px dashed var(--preview-border);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 200px;
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-2xl);
+            margin-top: var(--space-xl);
+            min-height: 250px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .preview-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(102, 126, 234, 0.03) 10px,
+                rgba(102, 126, 234, 0.03) 20px
+            );
+            pointer-events: none;
+            border-radius: var(--border-radius-lg);
         }
         
         .download-btn {
             background: var(--btn-success);
             border: none;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             color: white;
-            padding: 10px 20px;
-            margin: 5px;
+            padding: var(--space-md) var(--space-xl);
+            margin: var(--space-xs);
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: var(--font-size-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
         
         .download-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(40, 167, 69, 0.3);
+            box-shadow: var(--shadow-lg), 0 8px 15px rgba(79, 172, 254, 0.3);
             color: white;
         }
         
+        /* ===== INFO CARD MEJORADA ===== */
         .info-card {
-            background: var(--btn-info);
+            background: var(--success-gradient);
             color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+            padding: var(--space-2xl);
+            border-radius: var(--border-radius-lg);
+            margin: var(--space-xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .info-card h5 {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+        }
+
+        .info-card ol {
+            font-size: var(--font-size-base);
+            line-height: 1.8;
+        }
+
+        .info-card ol li {
+            margin-bottom: var(--space-sm);
         }
         
+        /* ===== UTILITY CLASSES ===== */
         .textarea-large {
-            min-height: 120px;
+            min-height: 140px;
+            resize: vertical;
         }
         
         .icon {
-            margin-right: 8px;
+            margin-right: var(--space-sm);
         }
         
         .pdf-loading {
-            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%) !important;
             pointer-events: none;
         }
         
@@ -215,162 +455,415 @@
         }
 
         .form-text {
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            font-size: var(--font-size-xs);
+            margin-top: var(--space-xs);
         }
 
         #cvPreview {
             background: white !important;
             color: #000 !important;
         }
+
+        /* ===== LOADING STATES ===== */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
         
+        /* ===== ANIMATIONS ===== */
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* ===== RESPONSIVE DESIGN MEJORADO ===== */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+
         @media (max-width: 768px) {
+            :root {
+                --space-xs: 0.125rem;
+                --space-sm: 0.25rem;
+                --space-md: 0.75rem;
+                --space-lg: 1rem;
+                --space-xl: 1.5rem;
+                --space-2xl: 2rem;
+            }
+
             .theme-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 8px 12px;
+                top: var(--space-md);
+                right: var(--space-md);
+                padding: var(--space-sm) var(--space-md);
             }
             
             .container {
-                margin: 10px;
-                padding: 20px;
+                margin: var(--space-md);
+                padding: var(--space-xl);
+            }
+
+            .header h1 {
+                font-size: var(--font-size-2xl);
+            }
+
+            .header p {
+                font-size: var(--font-size-base);
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: var(--space-sm);
+            }
+
+            .section-header {
+                padding: var(--space-md) var(--space-lg);
+                font-size: var(--font-size-base);
+            }
+
+            .info-card {
+                padding: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: var(--font-size-xl);
+            }
+
+            .container {
+                padding: var(--space-lg);
+            }
+
+            .form-control {
+                padding: var(--space-sm) var(--space-md);
+            }
+        }
+
+        /* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Focus styles for better accessibility */
+        .btn:focus-visible,
+        .form-control:focus-visible,
+        .theme-toggle:focus-visible {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-color: #000000;
+                --text-secondary: #000000;
+            }
+
+            [data-theme="dark"] {
+                --border-color: #ffffff;
+                --text-secondary: #ffffff;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Toggle de tema -->
-    <div class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
-        <i class="fas fa-moon" id="themeIcon"></i>
-    </div>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only">Saltar al contenido principal</a>
+    
+    <!-- Theme toggle with improved accessibility -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema de la aplicación" title="Cambiar tema">
+        <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
+    </button>
 
-    <div class="container">
-        <div class="header">
+    <!-- Main container with improved semantics -->
+    <div class="container fade-in-up">
+        <!-- Header section -->
+        <header class="header" id="main-content">
             <div class="d-flex justify-content-center align-items-center mb-3">
                 <div>
-                    <h1><i class="fas fa-file-alt icon"></i>Generador de CV Harvard</h1>
+                    <h1>
+                        <i class="fas fa-file-alt icon" aria-hidden="true"></i>
+                        Generador de CV Harvard
+                    </h1>
                     <p>Crea tu CV profesional en formato Harvard - Solo Español</p>
                 </div>
             </div>
-        </div>
+        </header>
         
-        <!-- Contenedor de alertas -->
-        <div id="alertas"></div>
+        <!-- Alert container with ARIA live region -->
+        <div id="alertas" aria-live="polite" aria-atomic="true"></div>
         
-        <form id="cvForm">
-            <!-- Información Personal -->
-            <div class="section-header">
-                <i class="fas fa-user icon"></i>Información Personal
-            </div>
-            
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="nombre" class="form-label">Nombre Completo</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Ej: María González López" required>
+        <!-- Main form with improved structure -->
+        <main>
+            <form id="cvForm" novalidate aria-label="Formulario para generar CV">
+                <!-- Personal Information Section -->
+                <section>
+                    <div class="section-header" role="banner">
+                        <i class="fas fa-user icon" aria-hidden="true"></i>
+                        <span>Información Personal</span>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">
+                                Nombre Completo <span class="text-danger" aria-label="requerido">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="nombre" 
+                                name="nombre"
+                                placeholder="Ej: María González López" 
+                                required 
+                                aria-describedby="nombre-help"
+                                autocomplete="name"
+                            >
+                            <div id="nombre-help" class="form-text">Este campo es obligatorio</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">
+                                Correo Electrónico <span class="text-danger" aria-label="requerido">*</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                class="form-control" 
+                                id="email" 
+                                name="email"
+                                placeholder="maria@ejemplo.com" 
+                                required
+                                aria-describedby="email-help"
+                                autocomplete="email"
+                            >
+                            <div id="email-help" class="form-text">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input 
+                                type="tel" 
+                                class="form-control" 
+                                id="telefono" 
+                                name="telefono"
+                                placeholder="+34 123 456 789"
+                                autocomplete="tel"
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ubicacion" class="form-label">Ubicación</label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="ubicacion" 
+                                name="ubicacion"
+                                placeholder="Madrid, España"
+                                autocomplete="address-level2"
+                            >
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Links -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="linkedin" class="form-label">LinkedIn (Opcional)</label>
+                            <input 
+                                type="url" 
+                                class="form-control" 
+                                id="linkedin" 
+                                name="linkedin"
+                                placeholder="https://linkedin.com/in/tu-perfil"
+                                aria-describedby="linkedin-help"
+                            >
+                            <div id="linkedin-help" class="form-text">URL completa de tu perfil de LinkedIn</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="portfolio" class="form-label">Portfolio (Opcional)</label>
+                            <input 
+                                type="url" 
+                                class="form-control" 
+                                id="portfolio" 
+                                name="portfolio"
+                                placeholder="https://tu-portfolio.com"
+                                aria-describedby="portfolio-help"
+                            >
+                            <div id="portfolio-help" class="form-text">URL de tu sitio web o portfolio</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Education Section -->
+                <section>
+                    <div class="section-header" role="banner">
+                        <i class="fas fa-graduation-cap icon" aria-hidden="true"></i>
+                        <span>Educación</span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="educacion" class="form-label">Formación Académica</label>
+                        <textarea 
+                            class="form-control textarea-large" 
+                            id="educacion" 
+                            name="educacion"
+                            placeholder="Ejemplo:&#10;Máster en Ciencia de Datos&#10;Universidad de Barcelona, 2021-2023&#10;&#10;Licenciatura en Matemáticas&#10;Universidad Autónoma de Barcelona, 2017-2021"
+                            aria-describedby="educacion-help"
+                        ></textarea>
+                        <div id="educacion-help" class="form-text">Separa cada título/institución con una línea nueva</div>
+                    </div>
+                </section>
+                
+                <!-- Experience Section -->
+                <section>
+                    <div class="section-header" role="banner">
+                        <i class="fas fa-briefcase icon" aria-hidden="true"></i>
+                        <span>Experiencia Profesional</span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="experiencia" class="form-label">Experiencia Laboral</label>
+                        <textarea 
+                            class="form-control textarea-large" 
+                            id="experiencia" 
+                            name="experiencia"
+                            placeholder="Ejemplo:&#10;Data Scientist&#10;InnovaTech Solutions, 2023-presente&#10;• Análisis de datos con Python y R&#10;• Desarrollo de modelos de machine learning&#10;• Visualización de datos con Tableau"
+                            aria-describedby="experiencia-help"
+                        ></textarea>
+                        <div id="experiencia-help" class="form-text">Usa • para viñetas en las responsabilidades</div>
+                    </div>
+                </section>
+                
+                <!-- Skills Section -->
+                <section>
+                    <div class="section-header" role="banner">
+                        <i class="fas fa-cogs icon" aria-hidden="true"></i>
+                        <span>Habilidades Técnicas</span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="habilidades" class="form-label">Competencias Técnicas</label>
+                        <textarea 
+                            class="form-control textarea-large" 
+                            id="habilidades" 
+                            name="habilidades"
+                            placeholder="Ejemplo:&#10;Lenguajes: Python, JavaScript, SQL&#10;Frameworks: React, Django, Flask&#10;Bases de datos: MySQL, MongoDB&#10;Herramientas: Git, Docker, AWS&#10;Idiomas: Español (nativo), Inglés (B2)"
+                            aria-describedby="habilidades-help"
+                        ></textarea>
+                        <div id="habilidades-help" class="form-text">Agrupa por categorías para mejor organización</div>
+                    </div>
+                </section>
+                
+                <!-- Action Buttons -->
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-primary" onclick="generarCV()" aria-describedby="generar-help">
+                        <i class="fas fa-magic icon" aria-hidden="true"></i>
+                        <span>Generar CV Harvard</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()" aria-describedby="limpiar-help">
+                        <i class="fas fa-eraser icon" aria-hidden="true"></i>
+                        <span>Limpiar</span>
+                    </button>
+                    <button type="button" class="btn btn-info" onclick="llenarEjemploCompleto()" aria-describedby="ejemplo-help">
+                        <i class="fas fa-user-graduate icon" aria-hidden="true"></i>
+                        <span>Ejemplo Completo</span>
+                    </button>
+                    <div id="generar-help" class="form-text">Genera tu CV con la información proporcionada</div>
+                    <div id="limpiar-help" class="form-text">Borra todos los campos del formulario</div>
+                    <div id="ejemplo-help" class="form-text">Llena el formulario con datos de ejemplo</div>
                 </div>
-                <div class="col-md-6">
-                    <label for="email" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="email" placeholder="maria@ejemplo.com" required>
-                </div>
-            </div>
-            
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" placeholder="+34 123 456 789">
-                </div>
-                <div class="col-md-6">
-                    <label for="ubicacion" class="form-label">Ubicación</label>
-                    <input type="text" class="form-control" id="ubicacion" placeholder="Madrid, España">
-                </div>
-            </div>
-            
-            <!-- Enlaces adicionales -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="linkedin" class="form-label">LinkedIn (Opcional)</label>
-                    <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/tu-perfil">
-                </div>
-                <div class="col-md-6">
-                    <label for="portfolio" class="form-label">Portfolio (Opcional)</label>
-                    <input type="url" class="form-control" id="portfolio" placeholder="https://tu-portfolio.com">
-                </div>
-            </div>
-            
-            <!-- Educación -->
-            <div class="section-header">
-                <i class="fas fa-graduation-cap icon"></i>Educación
-            </div>
-            
-            <div class="mb-3">
-                <label for="educacion" class="form-label">Formación Académica</label>
-                <textarea class="form-control textarea-large" id="educacion" 
-                    placeholder="Ejemplo:&#10;Máster en Ciencia de Datos&#10;Universidad de Barcelona, 2021-2023&#10;&#10;Licenciatura en Matemáticas&#10;Universidad Autónoma de Barcelona, 2017-2021"></textarea>
-                <div class="form-text">Separa cada título/institución con una línea nueva</div>
-            </div>
-            
-            <!-- Experiencia -->
-            <div class="section-header">
-                <i class="fas fa-briefcase icon"></i>Experiencia Profesional
-            </div>
-            
-            <div class="mb-3">
-                <label for="experiencia" class="form-label">Experiencia Laboral</label>
-                <textarea class="form-control textarea-large" id="experiencia" 
-                    placeholder="Ejemplo:&#10;Data Scientist&#10;InnovaTech Solutions, 2023-presente&#10;• Análisis de datos con Python y R&#10;• Desarrollo de modelos de machine learning&#10;• Visualización de datos con Tableau"></textarea>
-                <div class="form-text">Usa • para viñetas en las responsabilidades</div>
-            </div>
-            
-            <!-- Habilidades -->
-            <div class="section-header">
-                <i class="fas fa-cogs icon"></i>Habilidades Técnicas
-            </div>
-            
-            <div class="mb-3">
-                <label for="habilidades" class="form-label">Competencias Técnicas</label>
-                <textarea class="form-control textarea-large" id="habilidades" 
-                    placeholder="Ejemplo:&#10;Lenguajes: Python, JavaScript, SQL&#10;Frameworks: React, Django, Flask&#10;Bases de datos: MySQL, MongoDB&#10;Herramientas: Git, Docker, AWS&#10;Idiomas: Español (nativo), Inglés (B2)"></textarea>
-                <div class="form-text">Agrupa por categorías para mejor organización</div>
-            </div>
-            
-            <!-- Botones de acción -->
-            <div class="text-center mt-4">
-                <button type="button" class="btn btn-primary" onclick="generarCV()">
-                    <i class="fas fa-magic icon"></i>Generar CV Harvard
-                </button>
-                <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
-                    <i class="fas fa-eraser icon"></i>Limpiar
-                </button>
-                <button type="button" class="btn btn-info" onclick="llenarEjemploCompleto()">
-                    <i class="fas fa-user-graduate icon"></i>Ejemplo Completo
-                </button>
-            </div>
-        </form>
+            </form>
+        </main>
         
-        <!-- Área de resultados -->
-        <div id="resultado" class="preview-area" style="display: none;">
-            <h4><i class="fas fa-file-code icon"></i>CV Harvard Generado</h4>
+        <!-- Results Section -->
+        <section id="resultado" class="preview-area" style="display: none;" role="region" aria-label="Resultados del CV generado">
+            <h2>
+                <i class="fas fa-file-code icon" aria-hidden="true"></i>
+                CV Harvard Generado
+            </h2>
             <div class="mb-3">
-                <button type="button" class="download-btn" onclick="generarWord()" id="wordBtn">
-                    <i class="fas fa-file-word icon"></i>Descargar Word
+                <button type="button" class="download-btn" onclick="generarWord()" id="wordBtn" aria-describedby="word-help">
+                    <i class="fas fa-file-word icon" aria-hidden="true"></i>
+                    <span>Descargar Word</span>
                 </button>
-                <button type="button" class="download-btn" onclick="verVistaPrevia()" id="previewBtn">
-                    <i class="fas fa-eye icon"></i>Vista Previa
+                <button type="button" class="download-btn" onclick="verVistaPrevia()" id="previewBtn" aria-describedby="preview-help">
+                    <i class="fas fa-eye icon" aria-hidden="true"></i>
+                    <span>Vista Previa</span>
                 </button>
+                <div id="word-help" class="form-text">Descarga tu CV en formato Microsoft Word</div>
+                <div id="preview-help" class="form-text">Visualiza cómo se verá tu CV antes de descargarlo</div>
             </div>
-            <div id="previewArea" style="display: none;">
-                <h5>Vista Previa del CV:</h5>
-                <div id="cvPreview" style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Times New Roman', serif;"></div>
+            <div id="previewArea" style="display: none;" role="region" aria-label="Vista previa del CV">
+                <h3>Vista Previa del CV:</h3>
+                <div id="cvPreview" style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Times New Roman', serif;" role="document" aria-label="Contenido del CV generado"></div>
             </div>
-        </div>
+        </section>
         
-        <!-- Información adicional -->
-        <div class="info-card">
-            <h5><i class="fas fa-info-circle icon"></i>¿Cómo usar el generador?</h5>
+        <!-- Information Card -->
+        <aside class="info-card" role="complementary" aria-label="Información de ayuda">
+            <h3>
+                <i class="fas fa-info-circle icon" aria-hidden="true"></i>
+                ¿Cómo usar el generador?
+            </h3>
             <div class="row">
                 <div class="col-md-12">
                     <ol class="mb-0">
@@ -382,77 +875,644 @@
                     </ol>
                 </div>
             </div>
-        </div>
+        </aside>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Skip link styles -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .sr-only:focus {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0.5rem 1rem;
+            margin: 0;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+            background: var(--bg-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            z-index: 999999;
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-        // Función para cambiar entre tema claro y oscuro
+        // ===== ESTADO DE LA APLICACIÓN =====
+        const AppState = {
+            theme: 'light',
+            isGenerating: false,
+            formData: {},
+            validationErrors: new Set(),
+            
+            // Getters
+            get isValid() {
+                return this.validationErrors.size === 0;
+            },
+            
+            // Methods
+            setTheme(theme) {
+                this.theme = theme;
+                this.saveToStorage();
+            },
+            
+            setGenerating(status) {
+                this.isGenerating = status;
+            },
+            
+            updateFormData(data) {
+                this.formData = { ...this.formData, ...data };
+            },
+            
+            addValidationError(field) {
+                this.validationErrors.add(field);
+            },
+            
+            removeValidationError(field) {
+                this.validationErrors.delete(field);
+            },
+            
+            clearValidationErrors() {
+                this.validationErrors.clear();
+            },
+            
+            saveToStorage() {
+                try {
+                    localStorage.setItem('cvGeneratorState', JSON.stringify({
+                        theme: this.theme,
+                        formData: this.formData
+                    }));
+                } catch (error) {
+                    console.warn('No se pudo guardar en localStorage:', error);
+                }
+            },
+            
+            loadFromStorage() {
+                try {
+                    const saved = localStorage.getItem('cvGeneratorState');
+                    if (saved) {
+                        const state = JSON.parse(saved);
+                        this.theme = state.theme || 'light';
+                        this.formData = state.formData || {};
+                        return true;
+                    }
+                } catch (error) {
+                    console.warn('No se pudo cargar de localStorage:', error);
+                }
+                return false;
+            }
+        };
+
+        // ===== UTILIDADES MEJORADAS =====
+        const Utils = {
+            // Debounce para evitar ejecuciones excesivas
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            },
+            
+            // Throttle para limitar frecuencia de ejecución
+            throttle(func, limit) {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                }
+            },
+            
+            // Sanitizar HTML
+            sanitizeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            },
+            
+            // Validar email
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            },
+            
+            // Validar URL
+            isValidURL(url) {
+                try {
+                    new URL(url);
+                    return true;
+                } catch {
+                    return false;
+                }
+            },
+            
+            // Generar nombre de archivo seguro
+            generateSafeFilename(name) {
+                return name
+                    .replace(/[^a-zA-Z0-9áéíóúñü]/gi, '_')
+                    .replace(/_+/g, '_')
+                    .replace(/^_|_$/g, '')
+                    .toLowerCase();
+            },
+            
+            // Formatear fecha
+            formatDate(date = new Date()) {
+                return date.toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            },
+            
+            // Animar elemento
+            animateElement(element, animation = 'fade-in-up') {
+                element.classList.add(animation);
+                element.addEventListener('animationend', () => {
+                    element.classList.remove(animation);
+                }, { once: true });
+            }
+        };
+
+        // ===== GESTIÓN DE TEMAS MEJORADA =====
+        const ThemeManager = {
+            init() {
+                this.loadTheme();
+                this.setupMediaQueryListener();
+            },
+            
+            toggle() {
+                const newTheme = AppState.theme === 'dark' ? 'light' : 'dark';
+                this.setTheme(newTheme);
+            },
+            
+            setTheme(theme) {
+                const body = document.body;
+                const themeIcon = document.getElementById('themeIcon');
+                
+                if (theme === 'dark') {
+                    body.setAttribute('data-theme', 'dark');
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    body.removeAttribute('data-theme');
+                    themeIcon.className = 'fas fa-moon';
+                }
+                
+                AppState.setTheme(theme);
+                this.announceThemeChange(theme);
+            },
+            
+            loadTheme() {
+                if (AppState.loadFromStorage()) {
+                    this.setTheme(AppState.theme);
+                } else {
+                    // Detectar preferencia del sistema
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    this.setTheme(prefersDark ? 'dark' : 'light');
+                }
+            },
+            
+            setupMediaQueryListener() {
+                const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                mediaQuery.addEventListener('change', (e) => {
+                    if (!localStorage.getItem('cvGeneratorState')) {
+                        this.setTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            },
+            
+            announceThemeChange(theme) {
+                const message = theme === 'dark' ? 'Tema oscuro activado' : 'Tema claro activado';
+                this.createAriaAnnouncement(message);
+            },
+            
+            createAriaAnnouncement(message) {
+                const announcement = document.createElement('div');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.setAttribute('aria-atomic', 'true');
+                announcement.className = 'sr-only';
+                announcement.textContent = message;
+                document.body.appendChild(announcement);
+                setTimeout(() => document.body.removeChild(announcement), 1000);
+            }
+        };
+
+        // ===== VALIDACIÓN MEJORADA =====
+        const Validator = {
+            rules: {
+                nombre: {
+                    required: true,
+                    minLength: 2,
+                    pattern: /^[a-zA-ZáéíóúñüÁÉÍÓÚÑÜ\s]+$/,
+                    message: 'El nombre debe contener solo letras y espacios'
+                },
+                email: {
+                    required: true,
+                    type: 'email',
+                    message: 'Debe ser un email válido'
+                },
+                telefono: {
+                    pattern: /^[+]?[\d\s\-\(\)]+$/,
+                    message: 'Formato de teléfono inválido'
+                },
+                linkedin: {
+                    type: 'url',
+                    message: 'Debe ser una URL válida de LinkedIn'
+                },
+                portfolio: {
+                    type: 'url',
+                    message: 'Debe ser una URL válida'
+                }
+            },
+            
+            validateField(fieldName, value) {
+                const rule = this.rules[fieldName];
+                if (!rule) return { isValid: true };
+                
+                const errors = [];
+                
+                // Required validation
+                if (rule.required && (!value || value.trim() === '')) {
+                    errors.push('Este campo es obligatorio');
+                }
+                
+                // Skip other validations if empty and not required
+                if (!value || value.trim() === '') {
+                    return { isValid: errors.length === 0, errors };
+                }
+                
+                // Min length validation
+                if (rule.minLength && value.length < rule.minLength) {
+                    errors.push(`Debe tener al menos ${rule.minLength} caracteres`);
+                }
+                
+                // Pattern validation
+                if (rule.pattern && !rule.pattern.test(value)) {
+                    errors.push(rule.message || 'Formato inválido');
+                }
+                
+                // Type validation
+                if (rule.type === 'email' && !Utils.isValidEmail(value)) {
+                    errors.push('Debe ser un email válido');
+                }
+                
+                if (rule.type === 'url' && !Utils.isValidURL(value)) {
+                    errors.push('Debe ser una URL válida');
+                }
+                
+                return { isValid: errors.length === 0, errors };
+            },
+            
+            validateForm() {
+                const formData = FormManager.getData();
+                let isValid = true;
+                
+                AppState.clearValidationErrors();
+                
+                Object.keys(this.rules).forEach(fieldName => {
+                    const result = this.validateField(fieldName, formData[fieldName]);
+                    if (!result.isValid) {
+                        isValid = false;
+                        AppState.addValidationError(fieldName);
+                        this.showFieldError(fieldName, result.errors[0]);
+                    } else {
+                        this.clearFieldError(fieldName);
+                    }
+                });
+                
+                return isValid;
+            },
+            
+            showFieldError(fieldName, message) {
+                const field = document.getElementById(fieldName);
+                if (!field) return;
+                
+                field.classList.add('is-invalid');
+                field.setAttribute('aria-invalid', 'true');
+                
+                let errorDiv = field.parentNode.querySelector('.invalid-feedback');
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.className = 'invalid-feedback';
+                    field.parentNode.appendChild(errorDiv);
+                }
+                errorDiv.textContent = message;
+            },
+            
+            clearFieldError(fieldName) {
+                const field = document.getElementById(fieldName);
+                if (!field) return;
+                
+                field.classList.remove('is-invalid');
+                field.removeAttribute('aria-invalid');
+                
+                const errorDiv = field.parentNode.querySelector('.invalid-feedback');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            }
+        };
+
+        // ===== GESTIÓN DE FORMULARIO MEJORADA =====
+        const FormManager = {
+            fields: ['nombre', 'email', 'telefono', 'ubicacion', 'linkedin', 'portfolio', 'educacion', 'experiencia', 'habilidades'],
+            
+            init() {
+                this.setupEventListeners();
+                this.loadSavedData();
+            },
+            
+            setupEventListeners() {
+                this.fields.forEach(fieldName => {
+                    const field = document.getElementById(fieldName);
+                    if (!field) return;
+                    
+                    // Validación en tiempo real con debounce
+                    field.addEventListener('input', Utils.debounce(() => {
+                        this.handleFieldChange(fieldName);
+                    }, 300));
+                    
+                    // Validación al perder el foco
+                    field.addEventListener('blur', () => {
+                        this.validateField(fieldName);
+                    });
+                    
+                    // Auto-guardado
+                    field.addEventListener('input', Utils.throttle(() => {
+                        this.autoSave();
+                    }, 1000));
+                });
+                
+                // Prevenir envío del formulario
+                document.getElementById('cvForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    generarCV();
+                });
+            },
+            
+            handleFieldChange(fieldName) {
+                this.validateField(fieldName);
+                AppState.updateFormData({ [fieldName]: document.getElementById(fieldName).value });
+            },
+            
+            validateField(fieldName) {
+                const field = document.getElementById(fieldName);
+                const result = Validator.validateField(fieldName, field.value);
+                
+                if (result.isValid) {
+                    Validator.clearFieldError(fieldName);
+                    AppState.removeValidationError(fieldName);
+                } else {
+                    Validator.showFieldError(fieldName, result.errors[0]);
+                    AppState.addValidationError(fieldName);
+                }
+            },
+            
+            getData() {
+                const data = {};
+                this.fields.forEach(fieldName => {
+                    const field = document.getElementById(fieldName);
+                    if (field) {
+                        data[fieldName] = field.value.trim();
+                    }
+                });
+                return data;
+            },
+            
+            setData(data) {
+                this.fields.forEach(fieldName => {
+                    const field = document.getElementById(fieldName);
+                    if (field && data[fieldName] !== undefined) {
+                        field.value = data[fieldName];
+                    }
+                });
+                AppState.updateFormData(data);
+            },
+            
+            clear() {
+                this.fields.forEach(fieldName => {
+                    const field = document.getElementById(fieldName);
+                    if (field) {
+                        field.value = '';
+                        Validator.clearFieldError(fieldName);
+                    }
+                });
+                AppState.formData = {};
+                AppState.clearValidationErrors();
+                NotificationManager.show('Formulario limpiado correctamente', 'info');
+            },
+            
+            autoSave() {
+                AppState.updateFormData(this.getData());
+                AppState.saveToStorage();
+            },
+            
+            loadSavedData() {
+                if (AppState.formData && Object.keys(AppState.formData).length > 0) {
+                    this.setData(AppState.formData);
+                }
+            }
+        };
+
+        // ===== GESTIÓN DE NOTIFICACIONES MEJORADA =====
+        const NotificationManager = {
+            container: null,
+            
+            init() {
+                this.container = document.getElementById('alertas');
+            },
+            
+            show(message, type = 'info', duration = 5000) {
+                const alertId = 'alert-' + Date.now();
+                const iconMap = {
+                    success: 'fas fa-check-circle',
+                    error: 'fas fa-exclamation-triangle',
+                    warning: 'fas fa-exclamation-circle',
+                    info: 'fas fa-info-circle'
+                };
+                
+                const alertHTML = `
+                    <div id="${alertId}" class="alert alert-${type} alert-dismissible fade show" role="alert" aria-live="assertive">
+                        <i class="${iconMap[type] || iconMap.info}" aria-hidden="true"></i>
+                        <span>${Utils.sanitizeHTML(message)}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar alerta"></button>
+                    </div>
+                `;
+                
+                this.container.insertAdjacentHTML('afterbegin', alertHTML);
+                
+                const alertElement = document.getElementById(alertId);
+                Utils.animateElement(alertElement);
+                
+                // Auto-remover
+                if (duration > 0) {
+                    setTimeout(() => {
+                        if (alertElement && alertElement.parentNode) {
+                            alertElement.remove();
+                        }
+                    }, duration);
+                }
+                
+                return alertId;
+            },
+            
+            clear() {
+                this.container.innerHTML = '';
+            }
+        };
+
+        // ===== FUNCIONES PRINCIPALES MEJORADAS =====
+        
+        // Función para cambiar tema (llamada desde HTML)
         function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('themeIcon');
-            const currentTheme = body.getAttribute('data-theme');
+            ThemeManager.toggle();
+        }
+
+        // Función para generar CV (llamada desde HTML)
+        async function generarCV() {
+            if (AppState.isGenerating) {
+                NotificationManager.show('Ya se está generando un CV. Por favor espera.', 'warning');
+                return;
+            }
             
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                themeIcon.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'dark');
+            if (!Validator.validateForm()) {
+                NotificationManager.show('Por favor, corrige los errores en el formulario antes de continuar.', 'error');
+                return;
+            }
+            
+            try {
+                AppState.setGenerating(true);
+                
+                const datos = FormManager.getData();
+                
+                // Validar campos obligatorios
+                if (!datos.nombre || !datos.email) {
+                    NotificationManager.show('Por favor, completa al menos el nombre y el correo electrónico.', 'warning');
+                    return;
+                }
+                
+                // Generar vista previa HTML del CV
+                const cvHTML = generarCVHTML(datos);
+                
+                // Mostrar resultado
+                mostrarResultado(cvHTML, datos);
+                
+                // Mostrar mensaje de éxito
+                NotificationManager.show('¡CV generado exitosamente! ✅', 'success');
+                
+            } catch (error) {
+                console.error('Error al generar CV:', error);
+                NotificationManager.show('Hubo un error al generar el CV. Por favor, intenta nuevamente.', 'error');
+            } finally {
+                AppState.setGenerating(false);
             }
         }
 
-        // Cargar tema guardado al iniciar
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.getElementById('themeIcon');
+        // Función para limpiar formulario (llamada desde HTML)
+        function limpiarFormulario() {
+            FormManager.clear();
             
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                themeIcon.className = 'fas fa-moon';
+            // Ocultar resultado si está visible
+            const resultado = document.getElementById('resultado');
+            if (resultado) {
+                resultado.style.display = 'none';
             }
         }
 
-        // Función para mostrar/ocultar vista previa
+        // Función para vista previa (llamada desde HTML)
         function verVistaPrevia() {
             const previewArea = document.getElementById('previewArea');
             const previewBtn = document.getElementById('previewBtn');
             
             if (previewArea.style.display === 'none') {
                 previewArea.style.display = 'block';
-                previewBtn.innerHTML = '<i class="fas fa-eye-slash icon"></i>Ocultar Vista Previa';
+                previewBtn.innerHTML = '<i class="fas fa-eye-slash icon" aria-hidden="true"></i><span>Ocultar Vista Previa</span>';
                 
                 // Generar vista previa
-                const datos = {
-                    nombre: document.getElementById('nombre').value.trim(),
-                    email: document.getElementById('email').value.trim(),
-                    telefono: document.getElementById('telefono').value.trim(),
-                    ubicacion: document.getElementById('ubicacion').value.trim(),
-                    linkedin: document.getElementById('linkedin').value.trim(),
-                    portfolio: document.getElementById('portfolio').value.trim(),
-                    educacion: document.getElementById('educacion').value.trim(),
-                    experiencia: document.getElementById('experiencia').value.trim(),
-                    habilidades: document.getElementById('habilidades').value.trim()
-                };
+                const datos = FormManager.getData();
                 
                 if (datos.nombre && datos.email) {
                     const cvHTML = generarCVHTML(datos);
                     document.getElementById('cvPreview').innerHTML = cvHTML;
+                    Utils.animateElement(previewArea);
+                } else {
+                    NotificationManager.show('Completa al menos el nombre y email para ver la vista previa.', 'warning');
+                    previewArea.style.display = 'none';
+                    previewBtn.innerHTML = '<i class="fas fa-eye icon" aria-hidden="true"></i><span>Vista Previa</span>';
                 }
             } else {
                 previewArea.style.display = 'none';
-                previewBtn.innerHTML = '<i class="fas fa-eye icon"></i>Vista Previa';
+                previewBtn.innerHTML = '<i class="fas fa-eye icon" aria-hidden="true"></i><span>Vista Previa</span>';
             }
         }
 
-        // Cargar tema al iniciar la página
+        // ===== INICIALIZACIÓN =====
         document.addEventListener('DOMContentLoaded', function() {
-            loadTheme();
+            console.log('🚀 Generador de CV Harvard cargado');
+            
+            // Inicializar componentes
+            ThemeManager.init();
+            NotificationManager.init();
+            FormManager.init();
+            
+            // Aplicar animaciones iniciales
+            const container = document.querySelector('.container');
+            if (container) {
+                Utils.animateElement(container);
+            }
+            
+            // Configurar mejoras de accesibilidad
+            setupAccessibilityEnhancements();
+            
+            console.log('✅ Todos los componentes inicializados correctamente');
         });
+
+        function setupAccessibilityEnhancements() {
+            // Agregar navegación por teclado mejorada
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    // Cerrar modales o vista previa
+                    const previewArea = document.getElementById('previewArea');
+                    if (previewArea && previewArea.style.display !== 'none') {
+                        verVistaPrevia();
+                    }
+                }
+            });
+            
+            // Mejorar el enfoque para lectores de pantalla
+            const formElements = document.querySelectorAll('input, textarea, button, select');
+            formElements.forEach(element => {
+                element.addEventListener('focus', () => {
+                    element.setAttribute('data-focused', 'true');
+                });
+                
+                element.addEventListener('blur', () => {
+                    element.removeAttribute('data-focused');
+                });
+            });
+        }
     </script>
     <script src="script.js"></script>
 </body>
