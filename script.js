@@ -77,6 +77,7 @@ function generarCV() {
         ubicacion: document.getElementById('ubicacion').value.trim(),
         linkedin: document.getElementById('linkedin').value.trim(),
         portfolio: document.getElementById('portfolio').value.trim(),
+        resumen: document.getElementById('resumen').value.trim(),
         educacion: document.getElementById('educacion').value.trim(),
         experiencia: document.getElementById('experiencia').value.trim(),
         habilidades: document.getElementById('habilidades').value.trim()
@@ -136,13 +137,32 @@ function generarCVHTML(datos) {
     
     if (datos.linkedin || datos.portfolio) {
         html += `<p style="margin: 5px 0; font-size: 11pt;">`;
-        if (datos.linkedin) html += `LinkedIn: ${CoreUtils.escapeHTML(datos.linkedin)}`;
+        if (datos.linkedin) {
+            const linkedinUrl = datos.linkedin.startsWith('http') ? datos.linkedin : `https://${datos.linkedin}`;
+            html += `<a href="${linkedinUrl}" target="_blank" style="color: #0077b5; text-decoration: underline;">LinkedIn</a>`;
+        }
         if (datos.linkedin && datos.portfolio) html += ' • ';
-        if (datos.portfolio) html += `Portfolio: ${CoreUtils.escapeHTML(datos.portfolio)}`;
+        if (datos.portfolio) {
+            const portfolioUrl = datos.portfolio.startsWith('http') ? datos.portfolio : `https://${datos.portfolio}`;
+            html += `<a href="${portfolioUrl}" target="_blank" style="color: #0077b5; text-decoration: underline;">Portfolio</a>`;
+        }
         html += `</p>`;
     }
     
     html += `</div>`;
+    
+    // Resumen Profesional
+    if (datos.resumen) {
+        html += `
+        <div style="margin-bottom: 25px;">
+            <h2 style="color: #000; font-size: 14pt; font-weight: bold; margin: 0 0 10px 0; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-family: 'Times New Roman', serif;">
+                RESUMEN PROFESIONAL
+            </h2>
+            <div style="margin-left: 10px; font-size: 11pt;">
+                <p style="margin: 0; font-style: italic; text-align: justify;">${CoreUtils.escapeHTML(datos.resumen)}</p>
+            </div>
+        </div>`;
+    }
     
     // Educación
     if (datos.educacion) {
@@ -218,13 +238,8 @@ function generarCVHTML(datos) {
         html += `</div></div>`;
     }
     
-    // Pie de página
-    html += `
-        <div style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 10px; text-align: center; font-size: 10pt; color: #000; font-family: 'Times New Roman', serif;">
-            <p style="margin: 0;">${CoreUtils.escapeHTML(datos.nombre)} - Curriculum Vitae</p>
-            <p style="margin: 0;">Generado el ${fechaGeneracion}</p>
-        </div>
-    </div>`;
+    // Pie de página - SOLO SE ELIMINA ESTA SECCIÓN
+    html += `</div>`;
     
     return html;
 }
@@ -238,6 +253,7 @@ function generarWord() {
         ubicacion: document.getElementById('ubicacion').value.trim(),
         linkedin: document.getElementById('linkedin').value.trim(),
         portfolio: document.getElementById('portfolio').value.trim(),
+        resumen: document.getElementById('resumen').value.trim(),
         educacion: document.getElementById('educacion').value.trim(),
         experiencia: document.getElementById('experiencia').value.trim(),
         habilidades: document.getElementById('habilidades').value.trim()
@@ -383,6 +399,8 @@ function llenarEjemploCompleto() {
     document.getElementById('linkedin').value = 'linkedin.com/in/mariagarcia';
     document.getElementById('portfolio').value = 'mariagarcia-portfolio.com';
     
+    document.getElementById('resumen').value = `Profesional egresada en Administración de Empresas con especialización en análisis financiero, con un enfoque proactivo y orientado a resultados. Cuento con más de 3 años de experiencia en análisis de datos, gestión de riesgos financieros y liderazgo de equipos. Me destaco por mi capacidad para aprender rápidamente, adaptarme a entornos dinámicos y generar valor mediante la implementación de soluciones innovadoras basadas en datos.`;
+    
     document.getElementById('educacion').value = `Máster en Administración de Empresas (MBA)
 Universidad Complutense de Madrid, Madrid, España
 2020 - 2022
@@ -434,7 +452,7 @@ Software Especializado: Risk Management Systems, Credit Analysis Tools, Financia
 
 // Función para limpiar el formulario
 function limpiarFormulario() {
-    const campos = ['nombre', 'email', 'telefono', 'ubicacion', 'linkedin', 'portfolio', 'educacion', 'experiencia', 'habilidades'];
+    const campos = ['nombre', 'email', 'telefono', 'ubicacion', 'linkedin', 'portfolio', 'resumen', 'educacion', 'experiencia', 'habilidades'];
     campos.forEach(campo => {
         const elemento = document.getElementById(campo);
         if (elemento) {
@@ -503,7 +521,7 @@ function setupAccessibilityEnhancements() {
 
 // Configurar auto-guardado básico
 function setupBasicAutoSave() {
-    const campos = ['nombre', 'email', 'telefono', 'ubicacion', 'linkedin', 'portfolio', 'educacion', 'experiencia', 'habilidades'];
+    const campos = ['nombre', 'email', 'telefono', 'ubicacion', 'linkedin', 'portfolio', 'resumen', 'educacion', 'experiencia', 'habilidades'];
     
     campos.forEach(campo => {
         const elemento = document.getElementById(campo);
