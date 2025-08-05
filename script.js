@@ -156,7 +156,7 @@ function generarCVHTML(datos) {
         html += `
         <div style="margin-bottom: 25px;">
             <h2 style="color: #000; font-size: 14pt; font-weight: bold; margin: 0 0 10px 0; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-family: 'Times New Roman', serif;">
-                RESUMEN PROFESIONAL
+                PROFESSIONAL SUMMARY
             </h2>
             <div style="margin-left: 10px; font-size: 11pt;">
                 <p style="margin: 0; font-style: italic; text-align: justify;">${CoreUtils.escapeHTML(datos.resumen)}</p>
@@ -169,7 +169,7 @@ function generarCVHTML(datos) {
         html += `
         <div style="margin-bottom: 25px;">
             <h2 style="color: #000; font-size: 14pt; font-weight: bold; margin: 0 0 10px 0; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-family: 'Times New Roman', serif;">
-                EDUCACIÓN
+                EDUCATION
             </h2>
             <div style="margin-left: 10px; font-size: 11pt;">`;
         
@@ -194,7 +194,7 @@ function generarCVHTML(datos) {
         html += `
         <div style="margin-bottom: 25px;">
             <h2 style="color: #000; font-size: 14pt; font-weight: bold; margin: 0 0 10px 0; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-family: 'Times New Roman', serif;">
-                EXPERIENCIA PROFESIONAL
+                PROFESSIONAL EXPERIENCE
             </h2>
             <div style="margin-left: 10px; font-size: 11pt;">`;
         
@@ -218,7 +218,7 @@ function generarCVHTML(datos) {
         html += `
         <div style="margin-bottom: 25px;">
             <h2 style="color: #000; font-size: 14pt; font-weight: bold; margin: 0 0 10px 0; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-family: 'Times New Roman', serif;">
-                HABILIDADES Y COMPETENCIAS
+                SKILLS AND COMPETENCIES
             </h2>
             <div style="margin-left: 10px; font-size: 11pt;">`;
         
