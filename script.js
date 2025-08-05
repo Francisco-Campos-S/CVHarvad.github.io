@@ -89,19 +89,43 @@ function generarCV() {
         return;
     }
 
+    // Agregar estado de carga
+    const generateBtn = document.querySelector('button[onclick="generarCV()"]');
+    const originalContent = generateBtn.innerHTML;
+    generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon" aria-hidden="true"></i><span>Generando CV...</span>';
+    generateBtn.disabled = true;
+    generateBtn.classList.add('loading');
+
     try {
-        // Generar vista previa HTML del CV
-        const cvHTML = generarCVHTML(datos);
-        
-        // Mostrar resultado
-        mostrarResultado(cvHTML, datos);
-        
-        // Mostrar mensaje de éxito
-        mostrarAlerta('¡CV generado exitosamente! ✅', 'success');
+        // Simular un pequeño delay para mostrar la animación
+        setTimeout(() => {
+            // Generar vista previa HTML del CV
+            const cvHTML = generarCVHTML(datos);
+            
+            // Mostrar resultado con animación
+            mostrarResultado(cvHTML, datos);
+            
+            // Mostrar mensaje de éxito
+            mostrarAlerta('¡CV generado exitosamente! ✅', 'success');
+            
+            // Restaurar botón
+            generateBtn.innerHTML = originalContent;
+            generateBtn.disabled = false;
+            generateBtn.classList.remove('loading');
+            
+            // Agregar efecto de celebración
+            celebrarGeneracion();
+            
+        }, 800);
         
     } catch (error) {
         console.error('Error al generar CV:', error);
         mostrarAlerta('Hubo un error al generar el CV. Por favor, intenta nuevamente.', 'danger');
+        
+        // Restaurar botón en caso de error
+        generateBtn.innerHTML = originalContent;
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('loading');
     }
 }
 
@@ -264,12 +288,20 @@ function generarWord() {
         return;
     }
 
+    // Agregar estado de carga al botón
+    const wordBtn = document.querySelector('button[onclick="generarWord()"]');
+    const originalContent = wordBtn.innerHTML;
+    wordBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon" aria-hidden="true"></i><span>Generando Word...</span>';
+    wordBtn.disabled = true;
+    wordBtn.classList.add('loading');
+
     try {
-        const cvHTML = generarCVHTML(datos);
-        const fileName = CoreUtils.generateSafeFileName(datos.nombre) + '_CV.doc';
-        
-        // Crear blob con el HTML mejorado
-        const documentHTML = `
+        setTimeout(() => {
+            const cvHTML = generarCVHTML(datos);
+            const fileName = CoreUtils.generateSafeFileName(datos.nombre) + '_CV.doc';
+            
+            // Crear blob con el HTML mejorado
+            const documentHTML = `
 <!DOCTYPE html>
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
 <head>
@@ -299,27 +331,97 @@ function generarWord() {
     ${cvHTML}
 </body>
 </html>`;
-        
-        const blob = new Blob([documentHTML], {
-            type: 'application/msword'
-        });
-        
-        // Crear enlace de descarga
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(a.href);
-        
-        mostrarAlerta('¡CV en Word generado exitosamente! 📄', 'success');
+            
+            const blob = new Blob([documentHTML], {
+                type: 'application/msword'
+            });
+            
+            // Crear enlace de descarga
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+            
+            // Restaurar botón
+            wordBtn.innerHTML = originalContent;
+            wordBtn.disabled = false;
+            wordBtn.classList.remove('loading');
+            
+            // Mostrar mensaje de éxito con animación
+            mostrarAlerta('¡CV en Word generado exitosamente! 📄', 'success');
+            
+            // Efecto de celebración para la descarga
+            celebrarDescarga();
+            
+        }, 600);
         
     } catch (error) {
         console.error('Error al generar Word:', error);
         mostrarAlerta('Error al generar el documento Word.', 'danger');
+        
+        // Restaurar botón en caso de error
+        wordBtn.innerHTML = originalContent;
+        wordBtn.disabled = false;
+        wordBtn.classList.remove('loading');
     }
 }
+
+// Función para celebrar la descarga exitosa
+function celebrarDescarga() {
+    // Agregar efecto de pulso al botón
+    const wordBtn = document.querySelector('button[onclick="generarWord()"]');
+    wordBtn.classList.add('pulse');
+    setTimeout(() => {
+        wordBtn.classList.remove('pulse');
+    }, 1500);
+    
+    // Crear efecto de partículas
+    for (let i = 0; i < 20; i++) {
+        crearParticula();
+    }
+}
+
+// Función para crear partículas de celebración
+function crearParticula() {
+    const particula = document.createElement('div');
+    particula.style.position = 'fixed';
+    particula.style.width = '6px';
+    particula.style.height = '6px';
+    particula.style.backgroundColor = `hsl(${Math.random() * 60 + 200}, 70%, 60%)`; // Azules y verdes
+    particula.style.left = Math.random() * 100 + 'vw';
+    particula.style.top = Math.random() * 100 + 'vh';
+    particula.style.pointerEvents = 'none';
+    particula.style.zIndex = '9999';
+    particula.style.borderRadius = '50%';
+    particula.style.animation = `particle ${Math.random() * 2 + 1}s ease-out forwards`;
+    
+    document.body.appendChild(particula);
+    
+    setTimeout(() => {
+        if (particula.parentNode) {
+            particula.parentNode.removeChild(particula);
+        }
+    }, 3000);
+}
+
+// Agregar animación de partículas
+const particleStyle = document.createElement('style');
+particleStyle.textContent = `
+    @keyframes particle {
+        0% {
+            transform: scale(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(particleStyle);
 
 // ===== FUNCIONES AUXILIARES MEJORADAS =====
 
@@ -334,28 +436,41 @@ function escaparHTML(texto) {
     return CoreUtils.escapeHTML(texto);
 }
 
-// Mostrar resultado en la página
+// Mostrar resultado en la página con animaciones mejoradas
 function mostrarResultado(html, datos) {
     const contenedor = document.getElementById('resultado');
     if (contenedor) {
         contenedor.style.display = 'block';
         contenedor.innerHTML = `
-            <div class="mt-4">
+            <div class="mt-4 fade-in-up">
                 <h2 class="mb-3">
                     <i class="fas fa-file-code icon" aria-hidden="true"></i>
                     CV Harvard Generado
                 </h2>
-                <div class="cv-preview border p-3 mb-3" style="background: white;">
+                <div class="cv-preview border p-3 mb-3 slide-in-right" style="background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                     ${html}
                 </div>
                 <div class="d-flex gap-2 justify-content-center flex-wrap">
-                    <button onclick="generarWord()" class="btn download-btn">
+                    <button onclick="generarWord()" class="btn download-btn bounce">
                         <i class="fas fa-file-word"></i> Descargar Word
+                    </button>
+                    <button onclick="verVistaPrevia()" class="btn btn-info bounce" style="animation-delay: 0.2s;">
+                        <i class="fas fa-eye"></i> Vista Previa
                     </button>
                 </div>
             </div>
         `;
-        contenedor.scrollIntoView({ behavior: 'smooth' });
+        
+        // Scroll suave con offset
+        contenedor.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Agregar efecto de entrada
+        setTimeout(() => {
+            contenedor.classList.add('fade-in-up');
+        }, 100);
     }
 }
 
@@ -389,19 +504,79 @@ function mostrarAlerta(mensaje, tipo) {
     }, 5000);
 }
 
+// Función para celebrar la generación exitosa
+function celebrarGeneracion() {
+    // Crear confeti
+    for (let i = 0; i < 50; i++) {
+        crearConfeti();
+    }
+    
+    // Agregar efecto de pulso al resultado
+    const resultado = document.getElementById('resultado');
+    if (resultado) {
+        resultado.classList.add('pulse');
+        setTimeout(() => {
+            resultado.classList.remove('pulse');
+        }, 2000);
+    }
+}
+
+// Función para crear confeti
+function crearConfeti() {
+    const confeti = document.createElement('div');
+    confeti.style.position = 'fixed';
+    confeti.style.width = '10px';
+    confeti.style.height = '10px';
+    confeti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 50%)`;
+    confeti.style.left = Math.random() * 100 + 'vw';
+    confeti.style.top = '-10px';
+    confeti.style.pointerEvents = 'none';
+    confeti.style.zIndex = '9999';
+    confeti.style.borderRadius = '50%';
+    confeti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+    
+    document.body.appendChild(confeti);
+    
+    setTimeout(() => {
+        if (confeti.parentNode) {
+            confeti.parentNode.removeChild(confeti);
+        }
+    }, 5000);
+}
+
+// Agregar animación de caída para el confeti
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+`;
+document.head.appendChild(style);
+
 // ===== FUNCIÓN PARA LLENAR EJEMPLO COMPLETO =====
 function llenarEjemploCompleto() {
-    // Ejemplo mejorado en español
-    document.getElementById('nombre').value = 'María Elena García Rodríguez';
-    document.getElementById('email').value = 'maria.garcia@email.com';
-    document.getElementById('telefono').value = '+34 123 456 789';
-    document.getElementById('ubicacion').value = 'Madrid, España';
-    document.getElementById('linkedin').value = 'linkedin.com/in/mariagarcia';
-    document.getElementById('portfolio').value = 'mariagarcia-portfolio.com';
-    
-    document.getElementById('resumen').value = `Profesional egresada en Administración de Empresas con especialización en análisis financiero, con un enfoque proactivo y orientado a resultados. Cuento con más de 3 años de experiencia en análisis de datos, gestión de riesgos financieros y liderazgo de equipos. Me destaco por mi capacidad para aprender rápidamente, adaptarme a entornos dinámicos y generar valor mediante la implementación de soluciones innovadoras basadas en datos.`;
-    
-    document.getElementById('educacion').value = `Máster en Administración de Empresas (MBA)
+    // Agregar estado de carga al botón
+    const ejemploBtn = document.querySelector('button[onclick="llenarEjemploCompleto()"]');
+    const originalContent = ejemploBtn.innerHTML;
+    ejemploBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon" aria-hidden="true"></i><span>Cargando ejemplo...</span>';
+    ejemploBtn.disabled = true;
+    ejemploBtn.classList.add('loading');
+
+    // Simular carga con animación
+    setTimeout(() => {
+        // Ejemplo mejorado en español
+        document.getElementById('nombre').value = 'María Elena García Rodríguez';
+        document.getElementById('email').value = 'maria.garcia@email.com';
+        document.getElementById('telefono').value = '+34 123 456 789';
+        document.getElementById('ubicacion').value = 'Madrid, España';
+        document.getElementById('linkedin').value = 'linkedin.com/in/mariagarcia';
+        document.getElementById('portfolio').value = 'mariagarcia-portfolio.com';
+        
+        document.getElementById('resumen').value = `Profesional egresada en Administración de Empresas con especialización en análisis financiero, con un enfoque proactivo y orientado a resultados. Cuento con más de 3 años de experiencia en análisis de datos, gestión de riesgos financieros y liderazgo de equipos. Me destaco por mi capacidad para aprender rápidamente, adaptarme a entornos dinámicos y generar valor mediante la implementación de soluciones innovadoras basadas en datos.`;
+        
+        document.getElementById('educacion').value = `Máster en Administración de Empresas (MBA)
 Universidad Complutense de Madrid, Madrid, España
 2020 - 2022
 
@@ -414,7 +589,7 @@ Certificación en Análisis de Datos
 Coursera - Universidad de Stanford
 2021 - 2022`;
 
-    document.getElementById('experiencia').value = `Analista Senior de Negocios
+        document.getElementById('experiencia').value = `Analista Senior de Negocios
 Banco Santander, Madrid, España - Enero 2022 - Presente
 • Desarrollo e implementación de estrategias de análisis financiero para portafolios de más de €50M
 • Liderazgo de equipo de 5 analistas junior en proyectos de transformación digital
@@ -435,7 +610,7 @@ Deloitte España, Madrid, España - Enero 2020 - Mayo 2020
 • Análisis de estados financieros y preparación de informes detallados
 • Participación en proyectos de consultoría para PYMEs del sector servicios`;
 
-    document.getElementById('habilidades').value = `Competencias Técnicas: Python, R, SQL, Excel Avanzado, Power BI, Tableau, SAP, Bloomberg Terminal, MATLAB, VBA
+        document.getElementById('habilidades').value = `Competencias Técnicas: Python, R, SQL, Excel Avanzado, Power BI, Tableau, SAP, Bloomberg Terminal, MATLAB, VBA
 
 Idiomas: Español (Nativo), Inglés (C2 - Proficiency), Francés (B2 - Intermedio Alto), Portugués (B1 - Intermedio)
 
@@ -444,10 +619,33 @@ Competencias de Liderazgo: Gestión de equipos, Comunicación ejecutiva, Negocia
 Certificaciones: CFA Level II Candidate, FRM Part I, Scrum Master Certified, Six Sigma Green Belt
 
 Software Especializado: Risk Management Systems, Credit Analysis Tools, Financial Modeling, Data Visualization, Machine Learning aplicado a finanzas`;
-    
-    // Generar CV inmediatamente para mostrar el ejemplo
-    generarCV();
-    mostrarAlerta('Ejemplo cargado correctamente ✨', 'success');
+        
+        // Restaurar botón
+        ejemploBtn.innerHTML = originalContent;
+        ejemploBtn.disabled = false;
+        ejemploBtn.classList.remove('loading');
+        
+        // Agregar efecto visual a los campos llenados
+        const campos = ['nombre', 'email', 'telefono', 'ubicacion', 'linkedin', 'portfolio', 'resumen', 'educacion', 'experiencia', 'habilidades'];
+        campos.forEach((campo, index) => {
+            const elemento = document.getElementById(campo);
+            if (elemento) {
+                setTimeout(() => {
+                    elemento.classList.add('bounce');
+                    setTimeout(() => {
+                        elemento.classList.remove('bounce');
+                    }, 1000);
+                }, index * 100);
+            }
+        });
+        
+        // Generar CV inmediatamente para mostrar el ejemplo
+        setTimeout(() => {
+            generarCV();
+            mostrarAlerta('Ejemplo cargado correctamente ✨', 'success');
+        }, campos.length * 100 + 500);
+        
+    }, 800);
 }
 
 // Función para limpiar el formulario
